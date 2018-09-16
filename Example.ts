@@ -12,7 +12,9 @@ interface MyApi {
             addresses: HasOptions & HasGet<any[], any> & HasPost<any, any> & {
                 [id: string]: HasDelete & HasPut<any, any>;
             }
-        }
+        },
+        nearMe: HasGet,
+        me: HasGet & { (id): HasPut }
     };
 }
 
