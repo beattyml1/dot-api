@@ -3,11 +3,17 @@
 The core is dependency free but does depend on the ES fetch API which may need to be polyfilled for some browsers.
 The Observable/WebSockets plugin (not done yet) will depend on rxjs but unless you setup your webpack/browerify or imports in an unusual way it shouldn't send it to the browser unless you actually import the plugin.
 
-### Creating and calling the api
+### Calling the API
 ```TS
-let api = Api(apiBaseUrl, { headers}, {structure}) as MyApi;
 let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
 let data = result.json(); // Just returns a fetch result by default
+```
+
+### Initializing
+```TS
+let api = Api(apiBaseUrl, { headers}) as MyApi; // Strongly Typed
+let api = Api(apiBaseUrl, { headers}, {structure}) as DynamicApi; // Dynamic
+let api = Api(apiBaseUrl, { headers}, {structure}) as MyApi;  // Support IE
 ```
 
 ### API Type Declaration
