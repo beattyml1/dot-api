@@ -1,25 +1,16 @@
-import {ApiNode, apiNode, Node} from "./ApiNode";
+import {apiNode, Node} from "./ApiNode";
 export * from './ApiTypes'
 export * from './StructureTypes'
 export * from './StructureTypes'
-import {Subscribable} from 'rxjs'
+import {ApiOptions} from "./ApiOptions";
 
-const apiNodeProps = Object.keys(new ApiNode('', {}, {}));
 
 export function Api<TResponse=Response, TError=Response>(
     url: string,
     optionsAndHeaders: RequestInit,
-    options?: {
-        structure?: any,
-        formatMultiWord?: (x: string[]) => string,
-        processSuccess?: (x: Response) => TResponse,
-        processError?: (x: Response) => TError,
-        autoGetOnChange?: boolean,
-        generateSubscriptionStream?: (location: { pathParts: string[], query: any, queryString:string, resourcePath: string, pathWithQuery: string, webSocketUrl: string})
-            => Subscribable<any>
-    }
+    options?: ApiOptions<TResponse, TError>
 ) {
-    let { structure, formatMultiWord, processSuccess, processError } = options || {structure: null, formatMultiWord: null, processSuccess: x=>x, processError: e => { throw e; } };
+    let { structure, processSuccess, processError } = options || {structure: null, processSuccess: x=>x, processError: e => { throw e; } };
     var apiProxy = {
         get: function (api: Node, prop: string) {
             return prop in api ? api[prop] : new Proxy(node(api.$url, prop, api.$optionsAndHeaders, id => Api(concatUrl(concatUrl(api.$url, prop), id), optionsAndHeaders), options), apiProxy);
