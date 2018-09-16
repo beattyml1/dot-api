@@ -3,14 +3,16 @@
 ## Creating and calling the api
 Really cool syntax
 ```TS
-let structured = Api(apiBaseUrl, { headers }) as MyApi; // Can use DynamicApi if dynamic typing of resources is desired
-let result1 = await structured.people['123'].addresses.get({x: 'hello', y: 'world'});
+let api = Api(apiBaseUrl, { headers }) as MyApi; // Can use DynamicApi if dynamic typing of resources is desired
+let result = api structured.people['123'].addresses.get({x: 'hello', y: 'world'});
+let data = result.json(); // Just returns a fetch result by default
 ```
 
 IE Compatible syntax
 ```TS
-let legacy = Api(apiBaseUrl, { headers}, {structure}) as MyApi;
-let result3 = await legacy.people('123').addresses.get({ x: 'hello', y: 'world'})
+let api = Api(apiBaseUrl, { headers}, {structure}) as MyApi;
+let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
+let data = result.json(); // Just returns a fetch result by default
 ```
 
 ## API Type Declaration
