@@ -7,18 +7,6 @@ type StandardResource = HasOptions & HasGet<any[], any> & HasPost<any, any> & {
 }
 
 interface MyApi {
-    people: StandardResource & {
-        [id: string]: {
-            addresses: HasOptions & HasGet<any[], any> & HasPost<any, any> & {
-                [id: string]: HasDelete & HasPut<any, any>;
-            }
-        },
-        nearMe: HasGet,
-        me: HasGet & { (id): HasPut }
-    };
-}
-
-interface MyApiLegacy {
     people: HasGet<any[], any> & HasPost & {
         (id): HasPut & HasDelete & {
             addresses: HasGet<any[], any> & HasPost<any, any> & {
@@ -39,17 +27,14 @@ let structure = {
         nearMe: {},
         me: { $id: {} }
     }
-} as ApiStructureMap<MyApiLegacy>
+} as ApiStructureMap<MyApi>
 
 async function doStuff() {
     let headers = { ['authorization']: 'Bearer...' };
 
-    let structured = Api('/api', { headers }) as MyApi;
-    let result1 = await structured.people['123'].addresses.get({x: 'hello', y: 'world'});
+    let api = Api('/api', { headers}, {structure, processSuccess: r => r.json() }) as MyApi;
+    let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
 
     let dynamic = Api('/api', { headers }) as DynamicApi;
-    let result2 = await dynamic.people['123'].addresses.get({ x: 'hello', y: 'world'})
-
-    let legacy = Api('/api', { headers}, {structure}) as MyApiLegacy;
-    let result3 = await legacy.people('123').addresses.get({ x: 'hello', y: 'world'})
+    let result2 = await dynamic.people['123'].addresses.get({ x: 'hello', y: 'world'});
 }
