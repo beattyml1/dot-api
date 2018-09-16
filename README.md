@@ -3,6 +3,10 @@
 The core is dependency free but does depend on the ES fetch API which may need to be polyfilled for some browsers.
 The Observable/WebSockets plugin (not done yet) will depend on rxjs but unless you setup your webpack/browerify or imports in an unusual way it shouldn't send it to the browser unless you actually import the plugin.
 
+```sh
+npm install --save dot-api
+```
+
 ### Calling the API
 ```TS
 let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
