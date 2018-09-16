@@ -43,3 +43,16 @@ interface MyApiLegacy {
     };
 }
 ```
+
+## Definining a Structure object to support IE (or move processing time from the time of API call to app init)
+```TS 
+let structure = {
+    people: {
+        $id: {
+            addresses: { $id: {} }
+        },
+        nearMe: {},
+        me: { $id: {} }
+    }
+} as ApiStructureMap<MyApiLegacy>
+```
