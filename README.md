@@ -6,14 +6,13 @@ The Observable/WebSockets plugin (not done yet) will depend on rxjs but unless y
 ### Calling the API
 ```TS
 let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
-let data = result.json(); // Just returns a fetch result by default
 ```
 
 ### Initializing
 ```TS
-let api = Api(apiBaseUrl, { headers}) as MyApi; // Strongly Typed
+let api = Api(apiBaseUrl, { headers}, {processSuccess: r => r.json()}) as MyApi; // Strongly Typed
 let api = Api(apiBaseUrl, { headers}, {structure}) as DynamicApi; // Dynamic
-let api = Api(apiBaseUrl, { headers}, {structure}) as MyApi;  // Support IE
+let api = Api('/api', { headers}, {structure, processSuccess: r => r.json() }) as MyApi;
 ```
 
 ### API Type Declaration
