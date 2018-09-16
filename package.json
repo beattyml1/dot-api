@@ -2,7 +2,7 @@
   "name": "dot-api",
   "version": "0.0.1",
   "description": "An ultra readable api library",
-  "main": "core/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "tsc && jest --runInBand"
   },
