@@ -8,7 +8,7 @@ npm install --save dot-api
 
 ### Calling the API
 ```TS
-let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
+let result = await api.people('123').addresses.get({ city: 'Pittsburgh', state: 'PA'});
 ```
 
 ### Initializing
