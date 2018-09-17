@@ -1,7 +1,6 @@
-# dot-api
+# dot-api: An ultra readible API Client Library that you won't have to wrap
 
-The core is dependency free but does depend on the ES fetch API which may need to be polyfilled for some browsers.
-The Observable/WebSockets plugin (not done yet) will depend on rxjs but unless you setup your webpack/browerify or imports in an unusual way it shouldn't send it to the browser unless you actually import the plugin.
+Dependency free but does depend on the ES fetch API which may need to be polyfilled for some browsers.
 
 ```sh
 npm install --save dot-api
