@@ -1,11 +1,14 @@
-# dot-api
+# dot-api: An ultra readible API Client Library
 
-The core is dependency free but does depend on the ES fetch API which may need to be polyfilled for some browsers.
-The Observable/WebSockets plugin (not done yet) will depend on rxjs but unless you setup your webpack/browerify or imports in an unusual way it shouldn't send it to the browser unless you actually import the plugin.
+So readible you won't need to wrap it. Dependency free. Wrap's whatever handling you already have. Use with either fetch, axios, or whatever custom setup you have. Any thing that exposes get, post, etc functions and returns a promise should work
+
+```sh
+npm install --save dot-api
+```
 
 ### Calling the API
 ```typescript
-let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
+let result = await api.people('123').addresses.get({ city: 'Pittsburgh', state: 'PA'});
 ```
 
 ### Initializing
@@ -17,6 +20,7 @@ let api = Api('/api', apiInner, {structure }) as MyApi;
 ```
 
 Where `ApiInner` is:
+
 ```typescript
 interface ApiInner {
   get(params, ...args): Promise<any>;
