@@ -1,6 +1,6 @@
 # dot-api: An ultra readible API Client Library
 
-So readible you won't need to wrap it. Dependency free. Wrap's whatever handling you already have.
+So readible you won't need to wrap it. Dependency free. Wrap's whatever handling you already have. Use with either fetch, axios, or whatever custom setup you have. Any thing that exposes get, post, etc functions and returns a promise should work
 
 ```sh
 npm install --save dot-api
