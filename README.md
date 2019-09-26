@@ -1,6 +1,6 @@
 # dot-api: An ultra readible API Client Library
 
-So readible you won't need to wrap it. Dependency free but does depend on the ES fetch API which may need to be polyfilled for some browsers.
+So readible you won't need to wrap it. Dependency free. Wrap's whatever handling you already have.
 
 ```sh
 npm install --save dot-api
