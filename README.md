@@ -11,9 +11,9 @@ let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
 ### Initializing
 ```typescript
 let apiInner: ApiInner;
-let api = Api('', apiInner, {processSuccess: r => r.json()}) as MyApi; // Strongly Typed
+let api = Api('', apiInner, {}) as MyApi; // Strongly Typed
 let api = Api('', apiInner, {structure}) as DynamicApi; // Dynamic
-let api = Api('/api', apiInner, {structure, processSuccess: r => r.json() }) as MyApi;
+let api = Api('/api', apiInner, {structure }) as MyApi;
 ```
 
 Where `ApiInner` is:
@@ -26,6 +26,8 @@ interface ApiInner {
   del(...args): Promise<any>;
 } 
 ```
+
+ApiInner should handle setting headers/auth, any error handling, and it can either handle API base URL or you can have dot-api handle either works (this allows you to have a base API at one host but split into "API Modules"). 
 
 
 ### API Type Declaration
