@@ -1,10 +1,10 @@
-MIT License
+MIT License with ethics clause
 
 Copyright (c) 2018 Matthew Beatty
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
+in the Software without restriction except those explicitly listed, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
@@ -19,3 +19,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Ethics:
+Neither this software nor any derivatives may be used in behavior violating human rights as understood by international or US law, or would violate the geneva convention if the person in question were to be covered by said convention. It also may not be used in any action that discriminates based on race, sexual orientation, chosen gender expression, sex, or difference between sex and chosen gender expression or other legally protected class. Claiming that your inclusion in a legally protected class allows you to descriminate against one of the above explicitly mentioned classes voids your protection based on that class to the extent possible under US law. This software may not be use by Immigrations and Customs Enforcement, the Military, or any Goverment Department involved in incarceration of any government whether national, local, or in between. 
+
+Violations of this license's ethics clause that are not committed by the licensee or at the direction of the licensee and of which the licensee is not aware may be resolved by removing access and license to the software to the person or organization that committed the violation. If the violation is not inherent to the normal operating purpose of the organization or to the normal operating actions of the person or organization violating this ethics clause the licensee may at their option give violator notice to cease and desist and should said entity not comply after one week then terminate access and license to software or derivative.
