@@ -1,6 +1,6 @@
 export interface BaseNode {
     $url: string,
-    $optionsAndHeaders: RequestInit
+    $fetchFuncs: {get?, post?, put?, del?, patch?}
 }
 
 export interface HasGet<TReturn = any, TQuery = any> extends BaseNode {
@@ -27,7 +27,7 @@ export interface HasOptions<TReturn = any> extends BaseNode {
     options(): Promise<TReturn>;
 }
 
-export interface HasAll extends HasGet, HasPost, HasPut, HasPatch, HasDelete, HasOptions {
+export interface HasAll extends HasGet, HasPost, HasPut, HasPatch, HasDelete {
 }
 
 export interface HasGetCached <TReturn = any, TQuery = any> extends BaseNode {

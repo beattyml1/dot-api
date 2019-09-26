@@ -4,19 +4,32 @@ The core is dependency free but does depend on the ES fetch API which may need t
 The Observable/WebSockets plugin (not done yet) will depend on rxjs but unless you setup your webpack/browerify or imports in an unusual way it shouldn't send it to the browser unless you actually import the plugin.
 
 ### Calling the API
-```TS
+```typescript
 let result = await api.people('123').addresses.get({ x: 'hello', y: 'world'});
 ```
 
 ### Initializing
-```TS
-let api = Api(apiBaseUrl, { headers}, {processSuccess: r => r.json()}) as MyApi; // Strongly Typed
-let api = Api(apiBaseUrl, { headers}, {structure}) as DynamicApi; // Dynamic
-let api = Api('/api', { headers}, {structure, processSuccess: r => r.json() }) as MyApi;
+```typescript
+let apiInner: ApiInner;
+let api = Api('', apiInner, {processSuccess: r => r.json()}) as MyApi; // Strongly Typed
+let api = Api('', apiInner, {structure}) as DynamicApi; // Dynamic
+let api = Api('/api', apiInner, {structure, processSuccess: r => r.json() }) as MyApi;
 ```
 
+Where `ApiInner` is:
+```typescript
+interface ApiInner {
+  get(params, ...args): Promise<any>;
+  post(data, ...args): Promise<any>;
+  put(data, ...args): Promise<any>;
+  patch?(data, ...args): Promise<any>;
+  del(...args): Promise<any>;
+} 
+```
+
+
 ### API Type Declaration
-```TS
+```typescript
 interface MyApi {
     people: HasGet<any[], any> & HasPost & {
         (id): HasPut & HasDelete & {
@@ -31,7 +44,7 @@ interface MyApi {
 ```
 
 ### Definining a Structure object to support IE (or move processing time from the time of API call to app init)
-```TS 
+```typescript 
 let structure = {
     people: {
         $id: {

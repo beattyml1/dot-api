@@ -5,44 +5,34 @@ import {ApiOptions} from "./ApiOptions";
 
 export type Node = HasAll & { (id): HasAll };
 
-export function apiNode(url: string, optionsAndHeaders: RequestInit, $id: (key: string) => any, apiOptions?: ApiOptions<any, any>) {
+export function apiNode(url: string, {get, post, put, del, patch}, $id: (key: string) => any) {
     let func = id => $id(id);
-    let wrapResponse = (promise) => {
-        promise = (apiOptions && apiOptions.processSuccess) ? promise.then(apiOptions.processSuccess) : promise;
-        promise = (apiOptions && apiOptions.processError) ? promise.catch(apiOptions.processError) : promise;
-        return promise;
-    };
     let methods = {
         get(query) {
-            let u = getUrl(url, query);
-            return wrapResponse(fetch(u, optionsAndHeaders));
+            return get(getUrl(url, query));
         },
 
         post(data) {
-            return wrapResponse(fetch(url, {method: 'POST', body: JSON.stringify(data), ...optionsAndHeaders}));
+            return post(url, data)
         },
 
         put(data) {
-            return wrapResponse(fetch(url, {method: 'PUT', body: JSON.stringify(data), ...optionsAndHeaders}));
+            return put(url, data);
         },
 
         patch(data) {
-            return wrapResponse(fetch(url, {method: 'PATCH', body: JSON.stringify(data), ...optionsAndHeaders}));
+            return put(url, data);
         },
 
         delete() {
-            return wrapResponse(fetch(url, {method: 'DELETE', ...optionsAndHeaders}))
+            return del(url);
         },
 
-        options() {
-            return wrapResponse(fetch(url, {method: 'OPTIONS', ...optionsAndHeaders}));
-        },
-
-        async cachedGet(query) {
-            let u = getUrl(url, query);
-            let cached = plugins.cache && await plugins.cache.get(u);
-            return cached || await wrapResponse(fetch(u, optionsAndHeaders));
-        },
+        // async cachedGet(query) {
+        //     let u = getUrl(url, query);
+        //     let cached = plugins.cache && await plugins.cache.get(u);
+        //     return cached || await wrapResponse(fetch(u, optionsAndHeaders));
+        // },
 
 
         // observe(query) {
@@ -51,5 +41,5 @@ export function apiNode(url: string, optionsAndHeaders: RequestInit, $id: (key: 
         //     }
         // },
     }
-    return Object.assign(func, methods, {$id, $url: url, $optionsAndHeaders: optionsAndHeaders}) as Node
+    return Object.assign(func, methods, {$id, $url: url, $fetchFuncs: {get, post, put, del, patch} }) as Node
 }
